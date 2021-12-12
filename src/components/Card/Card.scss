@@ -1,0 +1,18 @@
+.card_wrapper{
+  width: 400px;
+  height: 530px;
+  border: 1px solid black;
+}
+
+.card_picture img{
+  width: 400px;
+  height: 217px;
+}
+
+
+.card_title{
+  display: flex;
+  justify-content: center;
+  width: 350px;
+  font-size: 24px;
+}

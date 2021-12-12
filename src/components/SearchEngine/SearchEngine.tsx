@@ -9,11 +9,11 @@ import {Card} from "../Card/Card";
 
 export const SearchEngine = () => {
     const dispatch = useDispatch()
-    useEffect(()=>{
-        axios.get('https://newsapi.org/v2/everything?q=tesla&from=2021-11-10&sortBy=publishedAt&apiKey=e71cd9f6ebac49a3bbb3a565321b892f').then(articles => dispatch(fetchArticles(articles.data.articles)))
+    useEffect(() => {
+        axios.get('https://api.spaceflightnewsapi.net/v3/articles').then(articles => dispatch(fetchArticles(articles.data)))
     }, [])
 
-    const searchEngineHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const searchEngineHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setSearch(e.target.value))
     }
 
@@ -23,11 +23,17 @@ export const SearchEngine = () => {
         <div>
             <div>Filter by keywords</div>
             <input onChange={searchEngineHandler} type="text" placeholder='The most successful IT companies in 2020'/>
-            {articles.map(el => {
-                // eslint-disable-next-line react/jsx-no-undef
-                return <Card/>
-            })}
-            <div>{articles[0].content}</div>
+            <div className='articles'>
+                {articles.map(el => {
+                    return <Card
+                        title={el.title}
+                        imageUrl={el.imageUrl}
+                        publishedAt={el.publishedAt}
+                        summary={el.summary}
+                        key={el.id}
+                    />
+                })}
+            </div>
         </div>
     )
 }
