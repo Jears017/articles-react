@@ -1,5 +1,19 @@
-.articles{
+.articles {
   display: flex;
-  justify-content: space-between;
+
   flex-wrap: wrap;
+}
+
+.search-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.search-input {
+  width: 600px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #EAEAEA;
+  font-size: 16px;
+  margin-top: 10px;
 }
