@@ -1,10 +1,19 @@
 .articles {
   display: flex;
-
   flex-wrap: wrap;
 }
 
 .search-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.search-results{
+  width: 1360px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #EAEAEA;
+  margin-top: 40px;
   font-size: 16px;
   font-weight: bold;
 }

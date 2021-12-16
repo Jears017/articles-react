@@ -1,4 +1,13 @@
-.content{
-  width: 1440px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+$app-width: 1440px;
+$main-font: 'Roboto', sans-serif;
+
+body {
+  font-family: $main-font
+}
+
+.content {
+  width: $app-width;
   margin: 0 auto;
 }

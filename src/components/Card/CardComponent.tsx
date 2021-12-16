@@ -3,31 +3,43 @@ import {Card, CardMedia, CardContent, Typography, CardActions, Button} from '@mu
 import TodayIcon from '@mui/icons-material/Today';
 import {Link} from "react-router-dom";
 import ArrowRightAltIcon from '@mui/icons-material/East';
-
+import Highlighter from "react-highlight-words";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {convertData} from "../../utils/convertData";
 
 
 interface ICardProps {
     title: string,
     imageUrl: string,
-    publishedAt: string
+    publishedAt: string,
     summary: string,
     id: string
 }
 
+
 export const CardComponent = ({id, title, imageUrl, summary, publishedAt}: ICardProps) => {
-    const date = new Date(publishedAt).toString().split(' ')
+    const {search} = useTypedSelector(state => state.articles)
+    const searchWords = search.split(/\s/).filter(word => word)
     return (
         <div>
-            <Card sx={{maxWidth: 400, height: 530, marginRight: 6, mt: 6, position: "relative"}}>
+            <Card sx={{width: 400, height: 530, marginRight: 10, mt: 5, position: "relative"}}>
                 <CardMedia
                     component="img"
                     height="217"
                     image={imageUrl}
+                    alt={title}
                 />
                 <CardContent>
+
                     <Typography sx={{fontWeight: "normal"}} gutterBottom variant="h5" component="div">
-                        {`${title.slice(0, 58)}...`}
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={searchWords}
+                            autoEscape={true}
+                            textToHighlight={`${title.slice(0, 58)}...`}
+                        />
                     </Typography>
+
                     <Typography sx={{display: "flex"}} gutterBottom variant="body1" component="div">
                         <Typography sx={{display: 'flex'}} gutterBottom
                                     variant="body1" component="div">
@@ -42,16 +54,22 @@ export const CardComponent = ({id, title, imageUrl, summary, publishedAt}: ICard
                             justifyContent: "flex-end"
                         }} gutterBottom
                                     variant="body1" component="div">
-                            {`${date[1]} ${date[2]}th, ${date[3]}`}
+                            {convertData(publishedAt)}
                         </Typography>
                     </Typography>
                     <Typography sx={{mt: 4, fontSize: 16}} variant="body2" color="text.secondary">
-                        {summary.slice(0, 100) + '...'}
+                        <Highlighter
+                            highlightClassName="YourHighlightClass"
+                            searchWords={searchWords}
+                            autoEscape={true}
+                            textToHighlight={summary.slice(0, 100) + '...'}
+                        />
                     </Typography>
                 </CardContent>
                 <CardActions sx={{position: 'absolute', bottom: 0, left: 0}}>
                     <Link style={{textDecoration: 'none'}} to={`/article/${id}`}>
-                        <Button sx={{textTransform: 'none', color: '#363636', fontSize: 16 }} size="small">Read more <ArrowRightAltIcon/></Button>
+                        <Button sx={{textTransform: 'none', color: '#363636', fontSize: 16}} size="small">Read
+                            more <ArrowRightAltIcon/></Button>
                     </Link>
                 </CardActions>
             </Card>

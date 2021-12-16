@@ -3,21 +3,21 @@ export interface IArticle {
     imageUrl: string,
     publishedAt: string
     summary: string,
-    id: string
+    id: string,
+
 }
 
 export interface ArticlesState {
     articles: any[],
     search: string,
-    article: IArticle
+    article: IArticle,
 }
 
 
 export enum ArticleActionType {
     FETCH_ARTICLES = 'FETCH_ARTICLES',
     SET_SEARCH = 'SET_SEARCH',
-    FILTER_ARTICLES = 'FILTER_ARTICLES',
-    GET_ARTICLE = 'GET_ARTICLE'
+    GET_ARTICLE = 'GET_ARTICLE',
 }
 
 interface FetchArticlesAction {
@@ -30,14 +30,11 @@ interface SetSearchAction {
     payload: string
 }
 
-interface FilterArticlesAction {
-    type: ArticleActionType.FILTER_ARTICLES,
-    payload: string
-}
 
 interface GetArticlesAction {
     type: ArticleActionType.GET_ARTICLE,
     payload: IArticle
 }
 
-export type ArticleAction = FetchArticlesAction | SetSearchAction | FilterArticlesAction | GetArticlesAction
+
+export type ArticleAction = FetchArticlesAction | SetSearchAction | GetArticlesAction
